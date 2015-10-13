@@ -22,11 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="TaxiTracker" />
+        <module name="TaxiTracker.domain" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="TaxiTracker" target="1.5" />
+      <module name="TaxiTracker.domain" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

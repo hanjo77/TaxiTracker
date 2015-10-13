@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TaxiTracker.iml" filepath="$PROJECT_DIR$/TaxiTracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TaxiTracker.domain/TaxiTracker.domain.iml" filepath="$PROJECT_DIR$/TaxiTracker.domain/TaxiTracker.domain.iml" />
     </modules>
   </component>
 </project>

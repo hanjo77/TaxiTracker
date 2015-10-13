@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>TaxiTracker</groupId>
-    <artifactId>TaxiTracker.parent</artifactId>
+    <artifactId>TaxiTracker.domain</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
 

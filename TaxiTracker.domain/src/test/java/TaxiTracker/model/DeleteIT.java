@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import TaxiTracker.model.Position;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -18,21 +18,36 @@ import org.junit.Test;
  */
 public class DeleteIT {
 
+    private EntityManager em;
+
 	@Test
 	public void test() {
 
-		EntityManager em = Persistence.createEntityManagerFactory(
-				"TaxiTracker.domain").createEntityManager();
+        this.em = Persistence.createEntityManagerFactory(
+                "TaxiTracker.domain").createEntityManager();
 
-        Query q = em.createQuery("select a from Position a");
-        @SuppressWarnings("unchecked")
-        List<Position> foundPositions = q.getResultList();
-        Position firstPosition = foundPositions.get(0);
-        // Assert.assertTrue(firstAuthor.getLastname().equals("Tolkien"));
+        String[] classes = new String[] {
+                "Position",
+                "Session",
+                "Driver",
+                "Car",
+        };
 
-        // Write access needs a transaction
-        em.getTransaction().begin();
-        em.remove(firstPosition);
-		em.getTransaction().commit();
+        for (int i = 0; i < classes.length; i++) {
+            deleteItems(classes[i]);
+        }
 	}
+
+    private void deleteItems(String className) {
+
+        Query q = this.em.createQuery("select a from "+ className +" a");
+        @SuppressWarnings("unchecked")
+        List<Object> items = q.getResultList();
+        for (int i = 0; i < items.size(); i++) {
+            this.em.getTransaction().begin();
+            this.em.remove(items.get(i));
+            this.em.getTransaction().commit();
+        }
+        Assert.assertEquals(q.getResultList().size(), 0);
+    }
 }

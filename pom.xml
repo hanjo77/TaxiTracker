@@ -9,6 +9,7 @@
     <modules>
         <module>TaxiTracker.domain</module>
         <module>TaxiTracker.service</module>
+        <module>TaxiTracker.rest</module>
     </modules>
     <build>
         <plugins>

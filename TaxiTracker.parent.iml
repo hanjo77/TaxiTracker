@@ -21,8 +21,5 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.persistence:eclipselink:2.5.1" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.persistence:javax.persistence:2.1.0" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.springframework:spring-core:3.1.4.RELEASE" level="project" />
   </component>
 </module>

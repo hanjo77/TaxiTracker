@@ -1,3 +1,6 @@
 .idea
 lib
 TaxiTracker.domain/target
+out/artifacts/TaxiTracker/WEB-INF/classes/TaxiTracker/service/impl
+*.jar
+TaxiTracker.rest/target

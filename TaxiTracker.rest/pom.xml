@@ -9,6 +9,8 @@
     <artifactId>TaxiTracker.rest</artifactId>
     <name>TaxiTracker REST</name>
 
+    <packaging>war</packaging>
+
     <dependencies>
         <dependency>
             <groupId>TaxiTracker</groupId>

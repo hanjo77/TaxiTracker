@@ -1,6 +1,8 @@
 package TaxiTracker.rest.controller;
 
+import TaxiTracker.service.DriverService;
 import TaxiTracker.service.SessionService;
+import TaxiTracker.service.dto.DriverDTO;
 import TaxiTracker.service.dto.SessionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -8,13 +10,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/sessions")
 public class SessionController {
 
-	@Inject
-	private SessionService sessionService;
+    @Inject
+    private SessionService sessionService;
+    @Inject
+    private DriverService driverService;
 
 	/**
 	 * Create
@@ -22,6 +27,16 @@ public class SessionController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public SessionDTO createSession(@RequestBody SessionDTO session) {
+		if (session.getId() == null) {
+			session.setStartTime(new Date());
+            session.setEndTime(new Date());
+		}
+		DriverDTO driver = session.getDriver();
+		if (driver != null) {
+            DriverDTO driverDTO = driverService.read(driver.getId());
+			driverDTO.setLastLogin(new Date());
+            session.setDriver(driverService.update(driverDTO));
+		}
 		SessionDTO createdSession = sessionService.create(session);
 		System.out.println("Session created with id = " + createdSession.getId());
 		return createdSession;

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/drivers")
@@ -22,6 +23,9 @@ public class DriverController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public DriverDTO createDriver(@RequestBody DriverDTO driver) {
+		if (driver.getLastLogin() == null) {
+			driver.setLastLogin(new Date());
+		}
 		DriverDTO createdDriver = driverService.create(driver);
 		System.out.println("Driver created with id = " + createdDriver.getId());
 		return createdDriver;

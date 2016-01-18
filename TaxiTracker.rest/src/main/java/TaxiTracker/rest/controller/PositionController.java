@@ -1,20 +1,25 @@
 package TaxiTracker.rest.controller;
 
 import TaxiTracker.service.PositionService;
+import TaxiTracker.service.SessionService;
 import TaxiTracker.service.dto.PositionDTO;
+import TaxiTracker.service.dto.SessionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/positions")
 public class PositionController {
 
-	@Inject
-	private PositionService positionService;
+    @Inject
+    private PositionService positionService;
+    @Inject
+    private SessionService sessionService;
 
 	/**
 	 * Create
@@ -22,6 +27,15 @@ public class PositionController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public PositionDTO createPosition(@RequestBody PositionDTO position) {
+		if (position.getTime() == null) {
+			position.setTime(new Date());
+		}
+        SessionDTO session = position.getSession();
+        if (session != null) {
+            SessionDTO sessionDTO = sessionService.read(session.getId());
+            sessionDTO.setEndTime(new Date());
+            position.setSession(sessionService.update(sessionDTO));
+        }
 		PositionDTO createdPosition = positionService.create(position);
 		System.out.println("Position created with id = " + createdPosition.getId());
 		return createdPosition;
